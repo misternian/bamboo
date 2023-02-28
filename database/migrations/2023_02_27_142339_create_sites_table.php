@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('icp')->nullable();
             $table->timestamps();
         });
     }

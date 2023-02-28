@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('carousels', function (Blueprint $table) {
             $table->id();
+            $table->string('url');
+            $table->string('refer_url')->nullable();
             $table->timestamps();
         });
     }
