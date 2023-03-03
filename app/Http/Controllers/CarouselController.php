@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CarouselResource;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCarouselRequest;
 
 class CarouselController extends Controller
 {
@@ -12,7 +14,7 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        //
+        return CarouselResource::collection(Carousel::orderBy('created_at', 'desc')->paginate(20));
     }
 
     /**
@@ -26,9 +28,16 @@ class CarouselController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCarouselRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $carousel = Carousel::create([
+            'url' => $validated['url'],
+            'refer_url' => $validated['refer_url'],
+        ]);
+
+        return new CarouselResource($carousel);
     }
 
     /**
@@ -50,9 +59,18 @@ class CarouselController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Carousel $carousel)
+    public function update(StoreCarouselRequest $request, Carousel $carousel)
     {
-        //
+        $validated = $request->validated();
+
+        $carousel->fill([
+            'url' => $validated['url'],
+            'refer_url' => $validated['refer_url'],
+        ]);
+
+        $carousel->save();
+
+        return new CarouselResource($carousel);
     }
 
     /**

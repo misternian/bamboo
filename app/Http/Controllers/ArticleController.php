@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Http\Resources\ArticleResource;
 
 class ArticleController extends Controller
 {
@@ -13,7 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return ArticleResource::collection(Article::orderBy('created_at', 'desc')->paginate(20));
     }
 
     /**
@@ -29,7 +30,14 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $article = Article::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+        ]);
+
+        return new ArticleResource($article);
     }
 
     /**
