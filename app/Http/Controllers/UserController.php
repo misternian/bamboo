@@ -59,6 +59,8 @@ class UserController extends Controller
         $user->fill([
             'real_name' => $validated['real_name'],
             'phone' => $validated['phone'],
+            'name' => $validated['name'],
+            'is_active' => $validated['is_active'],
         ]);
 
         $user->save();

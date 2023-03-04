@@ -23,7 +23,8 @@ class StoreCarouselRequest extends FormRequest
     {
         return [
             'url' => 'required|string|max:255',
-            'refer_url' => 'nullable|string|max:255'
+            'refer_url' => 'nullable|string|max:255',
+            'is_active' => 'boolean',
         ];
     }
 }

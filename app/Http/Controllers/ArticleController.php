@@ -35,6 +35,7 @@ class ArticleController extends Controller
         $article = Article::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
+            'article_category_id' => $validated['article_category_id'],
         ]);
 
         return new ArticleResource($article);
@@ -45,7 +46,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return new ArticleResource($article);
     }
 
     /**
@@ -59,9 +60,19 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateArticleRequest $request, Article $article)
+    public function update(StoreArticleRequest $request, Article $article)
     {
-        //
+        $validated = $request->validated();
+
+        $article->fill([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'article_category_id' => $validated['article_category_id'],
+        ]);
+
+        $article->save();
+
+        return new ArticleResource($article);
     }
 
     /**

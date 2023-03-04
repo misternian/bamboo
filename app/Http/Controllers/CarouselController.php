@@ -35,6 +35,7 @@ class CarouselController extends Controller
         $carousel = Carousel::create([
             'url' => $validated['url'],
             'refer_url' => $validated['refer_url'],
+            'is_active' => $validated['is_active'],
         ]);
 
         return new CarouselResource($carousel);
@@ -66,6 +67,7 @@ class CarouselController extends Controller
         $carousel->fill([
             'url' => $validated['url'],
             'refer_url' => $validated['refer_url'],
+            'is_active' => $validated['is_active'],
         ]);
 
         $carousel->save();

@@ -24,6 +24,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'real_name' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
+            'is_active' => 'boolean',
+            // 'email' => 'required|email|max:255|unique:users',
         ];
     }
 }

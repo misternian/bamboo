@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleCategoryRequest;
 use App\Http\Requests\UpdateArticleCategoryRequest;
 use App\Models\ArticleCategory;
+use App\Http\Resources\ArticleCategoryResource;
 
 class ArticleCategoryController extends Controller
 {
@@ -13,7 +14,7 @@ class ArticleCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return ArticleCategoryResource::collection(ArticleCategory::orderBy('created_at', 'desc')->paginate(20));
     }
 
     /**
@@ -29,7 +30,13 @@ class ArticleCategoryController extends Controller
      */
     public function store(StoreArticleCategoryRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $articleCategory = ArticleCategory::create([
+            'name' => $validated['name'],
+        ]);
+
+        return new ArticleCategoryResource($articleCategory);
     }
 
     /**
@@ -51,9 +58,17 @@ class ArticleCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateArticleCategoryRequest $request, ArticleCategory $articleCategory)
+    public function update(StoreArticleCategoryRequest $request, ArticleCategory $articleCategory)
     {
-        //
+        $validated = $request->validated();
+
+        $articleCategory->fill([
+            'name' => $validated['name'],
+        ]);
+
+        $articleCategory->save();
+
+        return new ArticleCategoryResource($articleCategory);
     }
 
     /**
