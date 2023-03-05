@@ -35,6 +35,7 @@ class ArticleController extends Controller
         $article = Article::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
+            'showed' => $validated['showed'],
             'article_category_id' => $validated['article_category_id'],
         ]);
 
@@ -67,6 +68,7 @@ class ArticleController extends Controller
         $article->fill([
             'title' => $validated['title'],
             'content' => $validated['content'],
+            'showed' => $validated['showed'],
             'article_category_id' => $validated['article_category_id'],
         ]);
 

@@ -24,6 +24,7 @@ class StoreArticleRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'showed' => 'boolean',
             'article_category_id' => 'required|exists:article_categories,id',
         ];
     }
