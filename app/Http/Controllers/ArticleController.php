@@ -6,6 +6,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Http\Resources\ArticleResource;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -37,6 +38,7 @@ class ArticleController extends Controller
             'content' => $validated['content'],
             'showed' => $validated['showed'],
             'article_category_id' => $validated['article_category_id'],
+            'user_id' => Auth::id(),
         ]);
 
         return new ArticleResource($article);

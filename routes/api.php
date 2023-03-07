@@ -8,6 +8,7 @@ use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\Utility\ProvideAssetAccessToken;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,6 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::post('/user/password', [UserController::class, 'editPassword']);
     Route::post('/company/introduction', [CompanyController::class, 'updateIntroduction']);
+
+    Route::get('/asset-access-token', ProvideAssetAccessToken::class);
 
     Route::apiResources([
         'user' => UserController::class,
