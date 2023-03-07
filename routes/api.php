@@ -8,8 +8,10 @@ use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\Utility\ProvideAssetAccessToken;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\Utility\ProvideAssetAccessToken;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,5 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'article-category' => ArticleCategoryController::class,
         'company' => CompanyController::class,
         'product-category' => ProductCategoryController::class,
+        'site' => SiteController::class,
     ]);
 });

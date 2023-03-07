@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Site;
+use App\Http\Resources\SiteResource;
+use App\Http\Requests\StoreSiteRequest;
 
 class SiteController extends Controller
 {
@@ -25,17 +28,26 @@ class SiteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Site $site)
     {
-        //
+        return new SiteResource($site);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreSiteRequest $request, Site $site)
     {
-        //
+        $validated = $request->validated();
+
+        $site->fill([
+            'name' => $validated['name'],
+            'icp' => $validated['icp'],
+        ]);
+
+        $site->save();
+
+        return new SiteResource($site);
     }
 
     /**
