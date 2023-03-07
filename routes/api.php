@@ -9,6 +9,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Utility\ProvideAssetAccessToken;
+use App\Http\Controllers\ProductCategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,5 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'article' => ArticleController::class,
         'article-category' => ArticleCategoryController::class,
         'company' => CompanyController::class,
+        'product-category' => ProductCategoryController::class,
     ]);
 });
