@@ -14,7 +14,7 @@ class InventoryTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('product_properties')->insert(
+        DB::table('inventory_types')->insert(
             [
                 'name' => '可售库存',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

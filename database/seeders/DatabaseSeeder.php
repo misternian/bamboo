@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             ProductPropertySeeder::class,
             ProductTypeSeeder::class,
             OrderTypeSeeder::class,
-            ClientSeeder::class
+            ClientSeeder::class,
+            SiteSeeder::class,
         ]);
     }
 }

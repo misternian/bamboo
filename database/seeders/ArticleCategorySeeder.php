@@ -16,7 +16,7 @@ class ArticleCategorySeeder extends Seeder
     {
         DB::table('article_categories')->insert(
             [
-                'name' => '默认分类',
+                'name' => '默认文章分类',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         );

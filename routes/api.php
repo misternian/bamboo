@@ -9,6 +9,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductPropertyController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Utility\ProvideAssetAccessToken;
 
@@ -41,5 +42,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'company' => CompanyController::class,
         'site' => SiteController::class,
         'product-category' => ProductCategoryController::class,
+        'product-property' => ProductPropertyController::class,
     ]);
 });
