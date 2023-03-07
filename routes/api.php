@@ -39,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'article' => ArticleController::class,
         'article-category' => ArticleCategoryController::class,
         'company' => CompanyController::class,
-        'product-category' => ProductCategoryController::class,
         'site' => SiteController::class,
+        'product-category' => ProductCategoryController::class,
     ]);
 });

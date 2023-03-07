@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             ArticleCategorySeeder::class,
             CompanySeeder::class,
             ProductCategorySeeder::class,
+            InventoryTypeSeeder::class,
+            ProductPropertySeeder::class,
+            ProductTypeSeeder::class,
+            OrderTypeSeeder::class,
+            ClientSeeder::class
         ]);
     }
 }
+

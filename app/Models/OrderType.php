@@ -4,16 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ProductSpu;
 
-class ProductCategory extends Model
+class OrderType extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-
-    public function products()
-    {
-        return $this->hasMany(ProductSpu::class, 'category_id');
-    }
 }
