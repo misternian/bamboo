@@ -10,6 +10,8 @@ use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductPropertyController;
+use App\Http\Controllers\ProductSpuController;
+use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Utility\ProvideAssetAccessToken;
 
@@ -43,5 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'site' => SiteController::class,
         'product-category' => ProductCategoryController::class,
         'product-property' => ProductPropertyController::class,
+        'product-type' => ProductTypeController::class,
+        'product-spu' => ProductSpuController::class,
     ]);
 });

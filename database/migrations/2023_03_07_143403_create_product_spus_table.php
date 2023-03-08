@@ -39,7 +39,7 @@ return new class extends Migration
             $table->date('expired_at')->default('2099-12-31'); //失效时间
             $table->unsignedTinyInteger('delivery_time')->default(12); //发货时间
             $table->string('bar_code')->nullable(); //条形码
-            $table->boolean('is_hidden')->default(0); //对外公开
+            $table->boolean('is_hidden')->default(1); //对外公开
             $table->foreignId('category_id')->constrained('product_categories');
             // $table->foreignId('type_id')->constrained('product_types');
             $table->unsignedBigInteger('type_id');
