@@ -28,11 +28,11 @@ return new class extends Migration
             $table->unsignedInteger('sell_price')->default(1000);
             $table->unsignedTinyInteger('mode')->default(1); //类型 1 单SKU商品 2 多SKU商品 3 多维SKU商品
             $table->unsignedMediumInteger('inventory')->default(0); //总可售库存
-            $table->unsignedSmallInteger('extent')->nullable(); //商品长
-            $table->unsignedSmallInteger('width')->nullable(); //商品宽
-            $table->unsignedSmallInteger('high')->nullable(); //商品高
-            $table->unsignedMediumInteger('weight')->nullable(); //商品重量
-            $table->unsignedMediumInteger('volume')->nullable(); //商品体积
+            $table->string('length')->nullable(); //商品长
+            $table->string('width')->nullable(); //商品宽
+            $table->string('height')->nullable(); //商品高
+            $table->string('weight')->nullable(); //商品重量
+            $table->string('volume')->nullable(); //商品体积
             $table->string('stock_code')->nullable(); //仓库代码
             $table->string('stock_name')->nullable(); //仓库简称
             $table->boolean('expired')->default(0); //长期产品

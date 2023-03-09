@@ -22,11 +22,11 @@ return new class extends Migration
             $table->unsignedInteger('price')->default(1000);
             $table->unsignedInteger('sell_price')->default(1000);
             $table->unsignedMediumInteger('inventory')->default(0); //可售库存
-            $table->unsignedSmallInteger('extent')->nullable();
-            $table->unsignedSmallInteger('width')->nullable();
-            $table->unsignedSmallInteger('high')->nullable();
-            $table->unsignedMediumInteger('weight')->nullable();
-            $table->unsignedMediumInteger('volume')->nullable();
+            $table->string('length')->nullable();
+            $table->string('width')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('volume')->nullable();
             $table->string('stock_code')->nullable(); //仓库代码
             $table->string('stock_name')->nullable(); //仓库简称
             $table->boolean('is_hidden')->default(0); //是否隐藏

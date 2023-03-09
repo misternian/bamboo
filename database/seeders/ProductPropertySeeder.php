@@ -14,11 +14,15 @@ class ProductPropertySeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('product_properties')->insert(
+        DB::table('product_properties')->insert([
             [
-                'name' => '规格',
+                'name' => '规格1',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
-        );
+            [
+                'name' => '规格2',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        ]);
     }
 }
