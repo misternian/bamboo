@@ -3,32 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProductType;
-use App\Http\Resources\ProductTypeResource;
-use App\Http\Requests\StoreProductTypeRequest;
+use App\Models\ClientType;
+use App\Http\Resources\ClientTypeResource;
+use App\Http\Requests\StoreClientTypeRequest;
 
-class ProductTypeController extends Controller
+class ClientTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return ProductTypeResource::collection(ProductType::orderBy('created_at', 'asc')->paginate(20));
+        return ClientTypeResource::collection(ClientType::orderBy('created_at', 'asc')->paginate(20));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductTypeRequest $request)
+    public function store(StoreClientTypeRequest $request)
     {
         $validated = $request->validated();
 
-        $productType = ProductType::create([
+        $clientType = ClientType::create([
             'name' => $validated['name'],
         ]);
 
-        return new ProductTypeResource($productType);
+        return new ClientTypeResource($clientType);
     }
 
     /**
@@ -42,17 +42,17 @@ class ProductTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreProductTypeRequest $request, ProductType $productType)
+    public function update(StoreClientTypeRequest $request, ClientType $clientType)
     {
         $validated = $request->validated();
 
-        $productType->fill([
+        $clientType->fill([
             'name' => $validated['name'],
         ]);
 
-        $productType->save();
+        $clientType->save();
 
-        return new ProductTypeResource($productType);
+        return new ClientTypeResource($clientType);
     }
 
     /**

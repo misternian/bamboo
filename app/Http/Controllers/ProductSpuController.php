@@ -20,7 +20,7 @@ class ProductSpuController extends Controller
      */
     public function index()
     {
-        //
+        return ProductSpuResource::collection(ProductSpu::orderByDesc('created_at')->paginate(10));
     }
 
     /**

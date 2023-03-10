@@ -14,11 +14,19 @@ class ProductTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('product_types')->insert(
+        DB::table('product_types')->insert([
             [
-                'name' => '全新',
+                'name' => '全新品',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
-        );
+            [
+                'name' => '二等品',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => '耗材',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        ]);
     }
 }

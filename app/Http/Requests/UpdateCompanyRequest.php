@@ -28,6 +28,7 @@ class UpdateCompanyRequest extends FormRequest
             'phone' => 'nullable|string|max:255',
             'email' => 'nullable|string|max:255',
             'skype' => 'nullable|string|max:255',
+            'website' => 'nullable|url|max:255',
         ];
     }
 }

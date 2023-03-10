@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ProductSkuResource;
 
 class ProductSpuResource extends JsonResource
 {
@@ -28,7 +29,7 @@ class ProductSpuResource extends JsonResource
             // 'price'  => $this->price,
             // 'sell_price'  => $this->sell_price,
             'mode'  => $this->mode,
-            // 'inventory'  => $this->inventory,
+            'inventory'  => $this->inventory,
             'length'  => $this->length,
             'width'  => $this->width,
             'height'  => $this->height,
@@ -52,10 +53,10 @@ class ProductSpuResource extends JsonResource
             'category_name' => $this->category->name,
             // 'category_two_name' => $this->category_two->name,
             // 'category_three_name' => $this->category_three->name,
-            // 'skus' => SkuResource::collection($this->skus),
+            'skus' => ProductSkuResource::collection($this->skus),
             'service' => $this->service->content,
-            // 'properties' => $this->properties,
-            // 'property_contents' => $this->property_contents,
+            'properties' => $this->properties,
+            'property_contents' => $this->property_contents,
             'user_name' => $this->user->name,
             'user_id' => $this->user_id,
         ];

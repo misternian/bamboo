@@ -16,11 +16,23 @@ class ProductPropertySeeder extends Seeder
     {
         DB::table('product_properties')->insert([
             [
-                'name' => '规格1',
+                'name' => '规格',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'name' => '规格2',
+                'name' => '尺寸',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => '颜色',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => '容量',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => '材质',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ]);

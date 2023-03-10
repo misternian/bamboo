@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Http\Resources\CompanyResource;
@@ -29,7 +28,7 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCompanyRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -64,6 +63,7 @@ class CompanyController extends Controller
             'phone' => $validated['phone'],
             'email' => $validated['email'],
             'skype' => $validated['skype'],
+            'website' => $validated['website'],
         ]);
 
         $company->save();

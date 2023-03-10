@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSiteRequest extends FormRequest
+class StoreClientTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,6 @@ class StoreSiteRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'icp' => 'nullable|string|max:255',
-            'website' => 'nullable|url|max:255',
-            'wab' => 'nullable|string|max:255',
         ];
     }
 }

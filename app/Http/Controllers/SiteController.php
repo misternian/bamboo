@@ -43,6 +43,8 @@ class SiteController extends Controller
         $site->fill([
             'name' => $validated['name'],
             'icp' => $validated['icp'],
+            'website' => $validated['website'],
+            'wab' => $validated['wab'],
         ]);
 
         $site->save();

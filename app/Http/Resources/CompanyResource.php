@@ -23,6 +23,7 @@ class CompanyResource extends JsonResource
             'phone' => $this->phone,
             'email' => $this->email,
             'skype' => $this->skype,
+            'website' => $this->website,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
         ];
