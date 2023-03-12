@@ -11,6 +11,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductPropertyController;
 use App\Http\Controllers\ProductSpuController;
+use App\Http\Controllers\ProductSkuController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ClientController;
@@ -38,6 +39,18 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/asset-access-token', ProvideAssetAccessToken::class);
 
+    Route::post('/product-spu-image', [ProductSpuController::class, 'editImage']);
+    Route::post('/product-spu-code', [ProductSpuController::class, 'editSpuCode']);
+    Route::post('/product-spu-title', [ProductSpuController::class, 'editTitle']);
+    Route::post('/product-spu-category', [ProductSpuController::class, 'editCategory']);
+    Route::post('/product-spu-service', [ProductSpuController::class, 'editSpuService']);
+    Route::post('/product-spu-note', [ProductSpuController::class, 'editSpuNote']);
+
+    Route::post('/product-sku-image', [ProductSkuController::class, 'editImage']);
+    Route::post('/product-sku-code', [ProductSkuController::class, 'editSkuCode']);
+    Route::post('/product-sku-name', [ProductSkuController::class, 'editName']);
+    Route::post('/product-sku-remark', [ProductSkuController::class, 'editRemark']);
+
     Route::apiResources([
         'user' => UserController::class,
         'carousel' => CarouselController::class,
@@ -49,6 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'product-property' => ProductPropertyController::class,
         'product-type' => ProductTypeController::class,
         'product-spu' => ProductSpuController::class,
+        'product-sku' => ProductSkuController::class,
         'client' => ClientController::class,
         'client-type' => ClientTypeController::class,
     ]);

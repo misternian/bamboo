@@ -44,15 +44,29 @@ class ProductSpuController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $spu = ProductSpu::firstWhere('spu_id', $id);
+
+        return new ProductSpuResource($spu);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, String $spu_id)
     {
-        //
+        $validated = $request->validate([
+            'is_hidden' => 'required|boolean',
+        ]);
+
+        $spu = ProductSpu::firstWhere('spu_id', $spu_id);
+
+        $spu->update([
+            'is_hidden' => $validated['is_hidden'],
+        ]);
+
+        $spu->save();
+
+        return response()->noContent();
     }
 
     /**
@@ -175,7 +189,6 @@ class ProductSpuController extends Controller
                     'bar_code' => $value['bar_code'],
                     // 'hidden' => $value['hidden'],
                 ]);
-
             }
             unset($value);
 
@@ -217,5 +230,133 @@ class ProductSpuController extends Controller
             'is_hidden' => $validated['is_hidden'],
             'bar_code' => $validated['bar_code'],
         ]);
+    }
+
+    public function editImage(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'required|exists:product_spus,spu_id',
+            'mode' => 'required|numeric|integer|max:10',
+            'image_1' => 'required|url|max:255',
+            'image_2' => 'nullable|url|max:255',
+            'image_3' => 'nullable|url|max:255',
+            'image_4' => 'nullable|url|max:255',
+            'image_5' => 'nullable|url|max:255',
+            'image_transparency' => 'nullable|url|max:255',
+        ]);
+
+        $spu = ProductSpu::firstWhere('spu_id', $validated['spu_id']);
+
+        $spu->update([
+            'image_1' => $validated['image_1'],
+            'image_2' => $validated['image_2'],
+            'image_3' => $validated['image_3'],
+            'image_4' => $validated['image_4'],
+            'image_5' => $validated['image_5'],
+            'image_transparency' => $validated['image_transparency'],
+        ]);
+
+        return response()->noContent();
+    }
+
+    public function editSpuCode(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'required|exists:product_spus,spu_id',
+            'spu_code' => 'required|string|max:255|unique:product_spus',
+        ]);
+
+        $spu = ProductSpu::firstWhere('spu_id', $validated['spu_id']);
+
+        $spu->spu_code = $validated['spu_code'];
+
+        $spu->save();
+
+        return response()->noContent();
+    }
+
+    public function editTitle(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'required|exists:product_spus,spu_id',
+            'title' => 'required|string|max:255',
+        ]);
+
+        $spu = ProductSpu::firstWhere('spu_id', $validated['spu_id']);
+
+        $spu->title = $validated['title'];
+
+        $spu->save();
+
+        if ($spu->mode == 1) {
+            $skus = $spu->skus;
+
+            foreach ($skus as $sku) {
+                $sku->name = $validated['title'];
+
+                $sku->save();
+            }
+        }
+
+        return response()->noContent();
+    }
+
+    public function editCategory(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'required|exists:product_spus,spu_id',
+            'category_id' => 'required|integer|exists:product_categories,id',
+        ]);
+
+        $spu = ProductSpu::firstWhere('spu_id', $validated['spu_id']);
+
+        $spu->category_id = $validated['category_id'];
+
+        $spu->save();
+
+        return response()->json([
+            'name' => $spu->category->name
+        ]);
+    }
+
+    public function editSpuService(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'required|exists:product_spus,spu_id',
+            'service' => 'nullable|string|max:255|',
+        ]);
+
+        $spu = ProductSpu::firstWhere('spu_id', $validated['spu_id']);
+
+        $spu->service()->update([
+            'content' => $validated['service']
+        ]);
+
+        return response()->noContent();
+    }
+
+    public function editSpuNote(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'required|exists:product_spus,spu_id',
+            'note' => 'nullable|string|max:255',
+        ]);
+
+        $spu = ProductSpu::firstWhere('spu_id', $validated['spu_id']);
+
+        $spu->note = $validated['note'];
+
+        $spu->save();
+
+        // $user = $request->user();
+
+        // $historical_remark = new SpuHistoricalRemark([
+        //     'content' => $validated['note'],
+        //     'user_id' => $user->id,
+        // ]);
+
+        // $spu->historical_remarks()->save($historical_remark);
+
+        return response()->noContent();
     }
 }
