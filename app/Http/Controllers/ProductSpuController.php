@@ -9,6 +9,7 @@ use App\Models\ProductSku;
 use App\Models\ProductService;
 use App\Models\ProductIntroduction;
 use App\Models\ProductPropertyContent;
+use App\Models\InventoryRecord;
 use App\Http\Resources\ProductSpuResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -390,5 +391,42 @@ class ProductSpuController extends Controller
         $spus = ProductSpu::filter($validated)->paginateFilter(10);
 
         return ProductSpuResource::collection($spus);
+    }
+
+    public function inStock(Request $request)
+    {
+        $validated = $request->validate([
+            'skus' => 'array',
+            'skus.*.sku_id' => 'required|exists:product_skus,sku_id',
+            'skus.*.new_inventory' => 'numeric|integer|min:0|max:100000',
+        ]);
+
+        foreach ($validated['skus'] as &$value) {
+            if ($value['new_inventory'] > 0) {
+                $sku = ProductSku::firstWhere('sku_id', $value['sku_id']);
+                $spu = $sku->spu;
+
+                $total_inventory = $sku->inventories()->findOrFail(1, ['type_id'])->pivot->number;
+                $total_inventory += $value['new_inventory'];
+
+                $sku->inventories()->updateExistingPivot(1, [
+                    'number' => $total_inventory,
+                ]);
+
+                $sku->increment('inventory', $value['new_inventory']);
+                $spu->increment('inventory', $value['new_inventory']);
+
+                InventoryRecord::create([
+                    'sku_id' => $sku->id,
+                    'inventory_type_id' => 1,
+                    'user_id' => Auth::id(),
+                    'number' => $value['new_inventory'],
+                ]);
+            }
+        }
+
+        unset($value);
+
+        return response()->noContent();
     }
 }

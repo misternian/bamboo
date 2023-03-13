@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductSpu;
 use App\Models\ProductPropertyContent;
 use App\Models\InventoryType;
+use EloquentFilter\Filterable;
 
 class ProductSku extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $guarded = [];
 

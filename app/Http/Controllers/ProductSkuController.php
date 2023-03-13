@@ -9,6 +9,7 @@ use App\Models\ProductSku;
 use App\Models\ProductPropertyContent;
 use App\Http\Requests\StoreProductSkuRequest;
 use App\Http\Controllers\ProductSpuController;
+use App\Http\Resources\ProductSkuResource;
 
 class ProductSkuController extends Controller
 {
@@ -17,7 +18,7 @@ class ProductSkuController extends Controller
      */
     public function index()
     {
-        //
+        return ProductSkuResource::collection(ProductSku::orderByDesc('created_at')->paginate(10));
     }
 
     /**
@@ -249,4 +250,19 @@ class ProductSkuController extends Controller
         ];
     }
 
+    public function search(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'nullable|integer',
+            'spu_code' => 'nullable|string|min:2|max:255',
+            // 'brand_name' => 'nullable|string|min:1|max:255',
+            'title' => 'nullable|string|min:2|max:255',
+            'sku_id' => 'nullable|integer',
+            'sku_code' => 'nullable|string|min:2|max:255',
+        ]);
+
+        $skus = ProductSku::filter($validated)->paginateFilter(10);
+
+        return ProductSkuResource::collection($skus);
+    }
 }

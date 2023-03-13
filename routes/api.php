@@ -46,11 +46,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/product-spu-service', [ProductSpuController::class, 'editSpuService']);
     Route::post('/product-spu-note', [ProductSpuController::class, 'editSpuNote']);
     Route::post('/product-spu-search', [ProductSpuController::class, 'search']);
+    Route::post('/product-spu-instock', [ProductSpuController::class, 'inStock']);
 
     Route::post('/product-sku-image', [ProductSkuController::class, 'editImage']);
     Route::post('/product-sku-code', [ProductSkuController::class, 'editSkuCode']);
     Route::post('/product-sku-name', [ProductSkuController::class, 'editName']);
     Route::post('/product-sku-remark', [ProductSkuController::class, 'editRemark']);
+    Route::post('/product-sku-search', [ProductSkuController::class, 'search']);
 
     Route::apiResources([
         'user' => UserController::class,
