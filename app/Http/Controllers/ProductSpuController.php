@@ -56,6 +56,7 @@ class ProductSpuController extends Controller
     {
         $validated = $request->validate([
             'is_hidden' => 'required|boolean',
+            'introduction' => 'nullable|string',
         ]);
 
         $spu = ProductSpu::firstWhere('spu_id', $spu_id);
@@ -65,6 +66,10 @@ class ProductSpuController extends Controller
         ]);
 
         $spu->save();
+
+        $spu->introduction()->update([
+            'content' => $validated['introduction']
+        ]);
 
         return response()->noContent();
     }
@@ -169,7 +174,7 @@ class ProductSpuController extends Controller
             $skus_arr = $validated["skus"];
             foreach ($skus_arr as &$value) {
                 $sku_id = $this->makeSkuId();
-                ProductSku::create([
+                $sku = ProductSku::create([
                     'sku_id' => $sku_id,
                     'spu_id' => $spu->id,
                     'name' => $value['name'],
@@ -188,6 +193,13 @@ class ProductSpuController extends Controller
                     // 'expired_at' => $validated['expired_at'],
                     'bar_code' => $value['bar_code'],
                     // 'hidden' => $value['hidden'],
+                ]);
+
+                $sku->inventories()->attach([
+                    1 => ['number' => 0],
+                    2 => ['number' => 0],
+                    3 => ['number' => 0],
+                    4 => ['number' => 0],
                 ]);
             }
             unset($value);
@@ -211,7 +223,7 @@ class ProductSpuController extends Controller
     {
         $skuId = $this->makeSkuId();
 
-        ProductSku::create([
+        $sku = ProductSku::create([
             'sku_id' => $skuId,
             'spu_id' => $spu->id,
             'name' => $validated['title'],
@@ -229,6 +241,13 @@ class ProductSpuController extends Controller
             'stock_name' => $validated['stock_name'],
             'is_hidden' => $validated['is_hidden'],
             'bar_code' => $validated['bar_code'],
+        ]);
+
+        $sku->inventories()->attach([
+            1 => ['number' => 0],
+            2 => ['number' => 0],
+            3 => ['number' => 0],
+            4 => ['number' => 0],
         ]);
     }
 

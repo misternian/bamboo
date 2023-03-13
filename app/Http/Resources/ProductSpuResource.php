@@ -29,7 +29,7 @@ class ProductSpuResource extends JsonResource
             // 'price'  => $this->price,
             // 'sell_price'  => $this->sell_price,
             'mode'  => $this->mode,
-            'inventory'  => $this->inventory,
+            'total_inventory'  => $this->inventory,
             'length'  => $this->length,
             'width'  => $this->width,
             'height'  => $this->height,

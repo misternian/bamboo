@@ -62,6 +62,13 @@ class ProductSkuController extends Controller
 
                 $currentSku = ProductSku::where('sku_id', $newSkuId)->first();
 
+                $currentSku->inventories()->attach([
+                    1 => ['number' => 0],
+                    2 => ['number' => 0],
+                    3 => ['number' => 0],
+                    4 => ['number' => 0],
+                ]);
+
                 $currentPropertyContent = ProductPropertyContent::where('value', $newPropertyContentsArray[$i])->where('spu_id', $currentSpu->id)->first();
 
                 $currentSku->property_contents()->attach($currentPropertyContent->id);
@@ -100,6 +107,13 @@ class ProductSkuController extends Controller
                 $currentSpu->skus()->save($newSku);
 
                 $currentSku = ProductSku::where('sku_id', $newSkuId)->first();
+
+                $currentSku->inventories()->attach([
+                    1 => ['number' => 0],
+                    2 => ['number' => 0],
+                    3 => ['number' => 0],
+                    4 => ['number' => 0],
+                ]);
 
                 $propertyContentNameCollection = Str::of($sku['name'])->explode(',');
 

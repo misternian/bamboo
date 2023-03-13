@@ -41,7 +41,8 @@ class ProductSkuResource extends JsonResource
             'spu_mode' => $this->spu->mode,
             'spu_title' => $this->spu->title,
             'property_contents' => ProductPropertyContentResource::collection($this->property_contents),
-            'total_inventory' => $this->inventory,    
+            'total_inventory' => $this->inventory,
+            'available_inventory' => $this->inventories()->findOrFail(1, ['type_id'])->pivot->number,
         ];
     }
 }
