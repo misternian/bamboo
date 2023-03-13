@@ -16,6 +16,8 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientTypeController;
+use App\Http\Controllers\InventoryRecordController;
+use App\Http\Controllers\InventoryTypeController;
 use App\Http\Controllers\Utility\ProvideAssetAccessToken;
 
 /*
@@ -68,5 +70,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'product-sku' => ProductSkuController::class,
         'client' => ClientController::class,
         'client-type' => ClientTypeController::class,
+        'inventory-type' => InventoryTypeController::class,
+        'inventory-record' => InventoryRecordController::class,
     ]);
 });
