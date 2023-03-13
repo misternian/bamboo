@@ -45,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/product-spu-category', [ProductSpuController::class, 'editCategory']);
     Route::post('/product-spu-service', [ProductSpuController::class, 'editSpuService']);
     Route::post('/product-spu-note', [ProductSpuController::class, 'editSpuNote']);
+    Route::post('/product-spu-search', [ProductSpuController::class, 'search']);
 
     Route::post('/product-sku-image', [ProductSkuController::class, 'editImage']);
     Route::post('/product-sku-code', [ProductSkuController::class, 'editSkuCode']);

@@ -14,11 +14,23 @@ class InventoryTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('inventory_types')->insert(
+        DB::table('inventory_types')->insert([
             [
                 'name' => '可售库存',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
-        );
+            [
+                'name' => '退货',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => '损耗',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => '历史销售',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        ]);
     }
 }

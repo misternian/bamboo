@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductSpu;
 use App\Models\ProductPropertyContent;
+use App\Models\InventoryType;
 
 class ProductSku extends Model
 {
@@ -21,5 +22,10 @@ class ProductSku extends Model
     public function property_contents()
     {
         return $this->belongsToMany(ProductPropertyContent::class, 'product_skus_and_product_property_contents', 'sku_id', 'property_content_id');
+    }
+
+    public function inventories()
+    {
+        return $this->belongsToMany(InventoryType::class, 'inventories', 'sku_id', 'type_id')->withPivot('number', 'updated_at')->withTimestamps();
     }
 }

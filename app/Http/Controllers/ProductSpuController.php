@@ -359,4 +359,17 @@ class ProductSpuController extends Controller
 
         return response()->noContent();
     }
+
+    public function search(Request $request)
+    {
+        $validated = $request->validate([
+            'spu_id' => 'nullable',
+            'spu_code' => 'nullable|string|max:255',
+            'title' => 'nullable|string|max:255',
+        ]);      
+
+        $spus = ProductSpu::filter($validated)->paginateFilter(10);
+
+        return ProductSpuResource::collection($spus);
+    }
 }

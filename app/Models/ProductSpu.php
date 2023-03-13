@@ -12,10 +12,11 @@ use App\Models\ProductProperty;
 use App\Models\ProductPropertyContent;
 use App\Models\ProductSku;
 use App\Models\User;
+use EloquentFilter\Filterable;
 
 class ProductSpu extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $guarded = [];
 
